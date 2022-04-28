@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% load socialaccount %}
+<title>로그인 페이지</title>
+{% endblock %}
+
+{% block main %}
+<h1>로그인 페이지 입니다.</h1>
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+<form action='{% url 'my_accounts:login' %}'method='post'>
+    {% csrf_token %}
+    <div>
+        <input type='text' name='username' placeholder='아이디입력하샘'/>
+    </div>
+    <div>
+        <input type='password' name='password' placeholder='비밀번호입력하샘'/>
+    </div>
+        <button type='submit'>로그인</button>
+
+</form>
+<form action='{% provider_login_url 'naver' %}' method='post' id='social-login'>
+    {% csrf_token %}
+    <button type='submit' form='social-login' style='background-color:#19ce60; border-color:#19ce60' >네이버 로긍ㄴ</button>
+</form>
+
+
+{% endblock %}
